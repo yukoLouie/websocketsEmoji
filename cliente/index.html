@@ -91,17 +91,23 @@
     let input = document.getElementById('input');
     let messages = document.getElementById('messages');
 
+    let emojiCount = 50; // Comienza con 50 emojis por mensaje, se incrementará con el tiempo
+
     function randomEmojiExplosion() {
       const emojis = ['😂', '🔥', '🦄', '🍕', '💩', '👻', '🌈', '🐸', '🧀', '🚀', '🥑', '🎩', '🎉', '💀', '🧠', '🍄', '🛸'];
-      for (let i = 0; i < 50; i++) {
+      
+      // Cada vez que se recibe un mensaje, aumentamos la cantidad de emojis generados
+      for (let i = 0; i < emojiCount; i++) {
         let emoji = document.createElement('div');
         emoji.classList.add('emoji');
         emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
         emoji.style.left = Math.random() * window.innerWidth + 'px';
         emoji.style.top = (window.innerHeight - 60) + 'px';
         document.body.appendChild(emoji);
-        setTimeout(() => emoji.remove(), 3000);
       }
+
+      // Cada vez que se genera una "explosión", se incrementa el contador
+      emojiCount += 10; // Aumentar la cantidad de emojis generados con cada mensaje
     }
 
     form.addEventListener('submit', function (e) {
